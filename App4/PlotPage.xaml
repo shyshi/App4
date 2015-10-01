@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="App4.PlotPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App4"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:oxy="using:OxyPlot.Windows"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="buttonAddLine" Grid.Row="2" Grid.Column="0" Content="增 加 曲 线" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+            <Button.Flyout>
+                <MenuFlyout x:Name="AddLine">
+                    <MenuFlyoutItem x:Name="addNewLine" Text="从新文件添加曲线" Click="AddNewLine_Click"/>
+                    <MenuFlyoutSeparator/>
+                    <MenuFlyoutItem x:Name="addDeletedLine" Text="从已删除的曲线中找回" IsEnabled="False">
+                        <!--<MenuFlyoutItem x:Name="DeletedLines" Text="{Binding Text}"/>-->
+                    </MenuFlyoutItem>
+
+                </MenuFlyout>
+            </Button.Flyout>
+        </Button>
+        <Button x:Name="buttonDecLine" Grid.Row="2" Grid.Column="1" Content="减 少 曲 线" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+            <Button.Flyout>
+                <MenuFlyout x:Name="DeleteExistedLines">
+                </MenuFlyout>
+            </Button.Flyout>
+        </Button>
+        <Button x:Name="buttonChangeStyle" Grid.Row="2" Grid.Column="2" Content="更 改 类 型" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+            <Button.Flyout>
+                <MenuFlyout x:Name="buttonChangeStyleFlyout">
+                    <MenuFlyoutItem x:Name="doubleLine" Text="双线性坐标" Click="doubleLine_Click"/>
+                    <MenuFlyoutItem x:Name="doublelog"  Text="双对数坐标" Click="doublelog_Click"/>
+                    <MenuFlyoutItem x:Name="xlog" Text="X轴对数坐标" Click="xlog_Click"/>
+                    <MenuFlyoutItem x:Name="ylog" Text="Y轴对数坐标" Click="ylog_Click"/>
+                </MenuFlyout>
+            </Button.Flyout>
+        </Button>
+        <Button x:Name="buttonExport" Grid.Row="2" Grid.Column="3" Content="导 出 图 像" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonExport_Click" Visibility="Collapsed"/>
+        <oxy:PlotView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Model="{Binding MyModel}"/>
+    </Grid>
+</Page>

@@ -76,51 +76,59 @@ namespace App4
         //    myModel.MyModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "COS(X)"));
         //}
 
-        private async void OnPickSingleFileClicked(object sender, RoutedEventArgs e)
+        private void OnPickSingleFileClicked(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            //PlotModel myModel = new PlotModel();
-            openPicker.FileTypeFilter.Add(".lis");
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            IList<string> fileContents = await FileIO.ReadLinesAsync(file);
-            count++;
-            LineSeries doublelogLine = new LineSeries();
-            LineSeries doublelineLine = new LineSeries();
-            LineSeries logxLine = new LineSeries();
-            LineSeries logyLine = new LineSeries();
-            doublelogLine.Title = file.Name;
-            doublelineLine.Title = file.Name;
-            logxLine.Title = file.Name;
-            logyLine.Title = file.Name;
-            for (int i = 2; i < fileContents.Count; i++)
-            {
-                string currentLine = fileContents[i];
-                string[] lineContents = currentLine.Split();
-                string[] valuableLineContents = new string[4];
-                int j = 0;
-                for (int index = 0; index < lineContents.Length; index++)
-                {
-                    if (lineContents[index] != "")
-                    {
-                        valuableLineContents[j] = lineContents[index];
-                        j++;
-                    }
-                }
-                double x = Convert.ToDouble(valuableLineContents[1]) - Convert.ToDouble(valuableLineContents[0]);
-                double y = Convert.ToDouble(valuableLineContents[2]) * x;
-                doublelineLine.Points.Add(new DataPoint(x, y));
-                doublelogLine.Points.Add(new DataPoint(x, y));
-                logxLine.Points.Add(new DataPoint(x, y));
-                logyLine.Points.Add(new DataPoint(x, y));
-            }
-            doublelogModel.MyModel.Series.Add(doublelogLine);
-            doublelogModel.MyModel.Series.Remove(doublelogLine);
-            doublelineModel.MyModel.Series.Add(doublelineLine);
-            logxModel.MyModel.Series.Add(logxLine);
-            logyModel.MyModel.Series.Add(logyLine);
-            button1.Content = count.ToString();
-            this.DataContext = new MainViewModel();
-            this.DataContext = logxModel;
+            //FileOpenPicker openPicker = new FileOpenPicker();
+            ////PlotModel myModel = new PlotModel();
+            //openPicker.FileTypeFilter.Add(".lis");
+            //StorageFile file = await openPicker.PickSingleFileAsync();
+            //IList<string> fileContents = await FileIO.ReadLinesAsync(file);
+            //count++;
+            //LineSeries doublelogLine = new LineSeries();
+            //LineSeries doublelineLine = new LineSeries();
+            //LineSeries logxLine = new LineSeries();
+            //LineSeries logyLine = new LineSeries();
+            //doublelogLine.Title = file.Name;
+            //doublelogLine.MarkerType = MarkerType.Triangle;
+            //doublelineLine.Title = file.Name;
+            //doublelineLine.MarkerType = MarkerType.Triangle;
+            //logxLine.Title = file.Name;
+            //logxLine.MarkerType = MarkerType.Triangle;
+            //logyLine.Title = file.Name;
+            //logyLine.MarkerType = MarkerType.Triangle;
+            //for (int i = 2; i < fileContents.Count; i++)
+            //{
+            //    string currentLine = fileContents[i];
+            //    string[] lineContents = currentLine.Split();
+            //    string[] valuableLineContents = new string[4];
+            //    int j = 0;
+            //    for (int index = 0; index < lineContents.Length; index++)
+            //    {
+            //        if (lineContents[index] != "")
+            //        {
+            //            valuableLineContents[j] = lineContents[index];
+            //            j++;
+            //        }
+            //    }
+            //    double x = Convert.ToDouble(valuableLineContents[1]) - Convert.ToDouble(valuableLineContents[0]);
+            //    double y = Convert.ToDouble(valuableLineContents[2]) * x;
+            //    doublelineLine.Points.Add(new DataPoint(x, y));
+            //    doublelogLine.Points.Add(new DataPoint(x, y));
+            //    logxLine.Points.Add(new DataPoint(x, y));
+            //    logyLine.Points.Add(new DataPoint(x, y));
+            //}
+            //doublelogModel.MyModel.Series.Add(doublelogLine);
+            //doublelogModel.MyModel.Series.Remove(doublelogLine);
+            //doublelineModel.MyModel.Series.Add(doublelineLine);
+            //logxModel.MyModel.Series.Add(logxLine);
+            //logyModel.MyModel.Series.Add(logyLine);
+            //button1.Content = count.ToString();
+            //this.DataContext = new MainViewModel();
+            //this.DataContext = logxModel;
+
+
+            Frame rootFrame = this.Parent as Frame;
+            rootFrame.Navigate(typeof(PlotPage));
         }
 
         private void OnDoubleLineClicked(object sender, RoutedEventArgs e)
